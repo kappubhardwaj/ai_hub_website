@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title >Contact Us - Kapscorp</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #367179;
+        margin: 0;
+        padding: 20px;
+      }
+
+      h1 {
+        text-align: center;
+        color: #2e1318;
+      }
+
+      .contact-info {
+        max-width: 400px;
+        margin: 0 auto;
+        background-color: #d0e0df;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .contact-info h2 {
+        font-size: 20px;
+        color: #333333;
+        margin-bottom: 10px;
+        text-align: center;
+      }
+
+      .contact-info p {
+        margin-bottom: 5px;
+      }
+
+      .contact-info .address {
+        color: #666666;
+        margin-bottom: 15px;
+      }
+
+      .contact-info .phone {
+        color: #666666;
+      }
+
+      .contact-info .email {
+        color: #666666;
+      }
+
+      .contact-form {
+        max-width: 400px;
+        margin: 20px auto;
+        background-color: #d9f5f8;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .contact-form label {
+        display: block;
+        margin-bottom: 10px;
+        color: #333333;
+      }
+
+      .contact-form input[type="text"],
+      .contact-form textarea {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #cccccc;
+        border-radius: 4px;
+        resize: vertical;
+      }
+
+      .contact-form button[type="submit"] {
+        background-color: #333333;
+        color: #ffffff;
+        padding: 10px 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      .contact-form button[type="submit"]:hover {
+        background-color: #555555;
+      }
+    </style>
+  </head>
+  <body>
+    <h1><i><u>Contact Us</i></u></h1>
+    <div class="contact-info">
+      <h2>Kapscorp</h2>
+      <p class="address">Sonipat, Haryana</p>
+      <p class="phone">Phone: +91 8708464273</p>
+      <p class="email">Email: <a href="mailto:kapscorp@gmail.com">kapscorp@gmail.com</a></p>
+      <p class="Insta">Insta: <a href="https://www.instagram.com/">Kapscorp private limited</a></p>
+    </div>
+
+    <div class="contact-form">
+      <h2>Send us a suggestion</h2>
+      <form action="mailto:kapscorp@gmail.com" method="post" enctype="text/plain">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email" required>
+
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="4" required></textarea>
+
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </body>
+</html>

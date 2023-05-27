@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Request AI Tools</title>
+  </head>
+  <style>
+    .success-message {
+      color: green;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 20px;
+    }
+    .error-message {
+      color: red;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 10px;
+    }
+  </style>
+  <script>
+    function showMessage() {
+      document.getElementById("success-message").style.display = "block";
+    }
+    function validateEmail() {
+      var emailInput = document.getElementById("email");
+      var email = emailInput.value.trim();
+
+      var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      var isValidEmail = emailRegex.test(email);
+
+      if (!isValidEmail) {
+        document.getElementById("error-message").style.display = "block";
+        emailInput.focus();
+        return false;
+      } else {
+        document.getElementById("error-message").style.display = "none";
+        return true;
+      }
+    }
+    async function submitForm(event) {
+      event.preventDefault();
+
+      if (!validateEmail()) {
+        return;
+      }
+
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const toolName = document.getElementById("tool-name").value.trim();
+      const toolDesc = document.getElementById("tool-details").value.trim();
+
+      const response = await fetch("/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email, toolName, toolDesc }),
+      });
+
+      if (response.ok) {
+        showMessage();
+      } else {
+        alert("Failed to submit the form. Please try again.");
+      }
+    }
+  </script>
+  <body background="images/request_background.jpg">
+    <h1 style="text-align: center; font-style: italic">Request AI Tools</h1>
+    <form
+      class="request-form"
+      style="
+        max-width: 400px;
+        margin: 0 auto;
+        background-color: #d4d383;
+        padding: 20px;
+        border-radius: 5px;
+      "
+      onsubmit="submitForm(event)"
+    >
+      <label for="name" style="display: block">Name:</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        required
+        style="
+          width: 100%;
+          padding: 2px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          margin-bottom: 10px;
+        "
+      /><br />
+      <label for="email" style="display: block">Email:</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        required
+        style="
+          width: 100%;
+          padding: 2px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          margin-bottom: 10px;
+        "
+      /><br />
+      <label for="tool-name" style="display: block">AI Tool Name:</label>
+      <input
+        type="text"
+        id="tool-name"
+        name="tool-name"
+        required
+        style="
+          width: 100%;
+          padding: 2px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          margin-bottom: 10px;
+        "
+      /><br />
+      <label for="tool-details" style="display: block">Tool Details:</label>
+      <textarea
+        id="tool-details"
+        name="tool-details"
+        required
+        style="
+          width: 100%;
+          padding: 2px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          resize: vertical;
+          margin-bottom: 10px;
+        "
+      ></textarea
+      ><br />
+      <input
+        type="submit"
+        value="Submit"
+        style="
+          background-color: #333;
+          color: #fff;
+          padding: 2px 16px;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+        "
+      />
+      <div id="success-message" class="success-message" style="display: none">
+        Request submitted!
+      </div>
+      <div id="error-message" class="error-message" style="display: none">
+        Please enter a valid email address.
+      </div>
+    </form>
+  </body>
+</html>

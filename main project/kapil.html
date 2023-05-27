@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Kapscorp - AI Tools Hub</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <script>
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+
+      var requestOptions = {
+        method: "GET",
+        headers: myHeaders,
+        redirect: "follow",
+      };
+
+      fetch("http://localhost:8080/items", requestOptions)
+        .then((response) => response.text())
+        .then((result) => {
+          const json = JSON.parse(result);
+          for (var i = 0; i < json.length; i++) {
+            const hello = document.getElementById("items-table");
+            hello.innerHTML += `
+             <tr>
+                <td>
+                    <h2 class="tool-name">${json[i].name}</h2>
+                    <a href="${json[i].link}" class="tool-button" target="_blank">Visit Tool</a>
+                </td>
+                <td>
+                    <p class="tool-description">
+                        ${json[i].desc}
+                    </p>
+                </td>
+            </tr>`;
+          }
+        })
+        .catch((error) => console.log("error", error));
+
+      function searchTools() {
+        var input = document.getElementById("search-input").value.toLowerCase();
+        var tools = document.getElementsByTagName("tr");
+
+        for (var i = 1; i < tools.length; i++) {
+          var tool = tools[i];
+          var name = tool.children[0].children[0].firstChild.textContent;
+          // var description = tool.children[1].textContent.toLowerCase();
+          if (name) {
+            if (name.toLowerCase().includes(input)) {
+              tool.style.display = "block"; // Show the tool row
+            } else {
+              tool.style.display = "none"; // Hide the tool row
+            }
+          } else {
+            tool.style.display = "none"; // Hide the tool row
+          }
+        }
+      }
+      function openRequestPage() {
+        window.open("request.html", "_blank");
+      }
+    </script>
+  </head>
+
+  <body>
+    <img
+      src="images/Screenshot_from_2023-05-24_22-49-49-removebg-preview.png"
+      alt="Logo"
+    />
+    <div id="header">
+      <h1>Kapscorp - AI Tools Hub</h1>
+    </div>
+    <div class="top-right-buttons">
+      <button onclick="window.open('contact.html', '_blank')">Contact</button>
+
+      <button onclick="window.open('about.html', '_blank')">About Us</button>
+
+      <button class="request-button" onclick="openRequestPage()">
+        Request AI Tools
+      </button>
+      <script>
+        function openRequestPage() {
+          window.open("request.html");
+        }
+        function openLink() {
+          window.open("https://www.youtube.com/@freecodecamp/videos", "_blank");
+        }
+      </script>
+      <button onclick="openLink()">Learn With Us</button>
+    </div>
+    <div id="content">
+      <div id="hello"></div>
+      <h2>Welcome to Kapscorp AI Tools Hub!</h2>
+      <p>Access various AI tools in one place for enhanced productivity.</p>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search..." />
+        <button onclick="searchTools()" type="submit" id="search-button">
+          Search
+        </button>
+      </div>
+      <div id="search-results"></div>
+      <table>
+        <tr>
+          <th>AI Tool</th>
+          <th>Description</th>
+        </tr>
+      </table>
+
+      <table id="items-table"></table>
+    </div>
+  </body>
+</html>
